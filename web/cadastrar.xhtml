@@ -19,7 +19,7 @@
                     <p:spacer height="10px" width="100%"/>
                     <p:inputText id="username" value="#{usuarioBean.novoUsuario.login}" class="ui-g-12" placeholder="Nome do usuário" required="true" />
                     <p:spacer height="10px" width="100%"/>
-                    <p:password id="senha" value="#{usuarioBean.novoUsuario.senha}" placeholder="Senha" match="senha2" class="ui-g-12" feedback="true" promptLabel="Digite a senha" weakLabel="Fraca"
+                    <p:password id="senha" value="#{usuarioBean.novoUsuario.senha}" placeholder="Senha"  class="ui-g-12" feedback="true" promptLabel="Digite a senha" weakLabel="Fraca"
                     goodLabel="Boa" strongLabel="Forte" />
                     <p:spacer height="10px" width="100%"/>
                     <p:commandButton style="width: 100%" action="#{usuarioBean.cadastrarUsuario()}" update="cadastrarPanel" value="Salvar cadastro" styleClass="ui-priority-primary"/>

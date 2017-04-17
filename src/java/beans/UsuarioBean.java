@@ -6,6 +6,7 @@
 package beans;
 
 import dao.UsuarioDao;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import model.entities.Usuario;
@@ -27,6 +28,13 @@ public class UsuarioBean {
     public void cadastrarUsuario() {
         UsuarioDao usuarioDao = new UsuarioDao();
         usuarioDao.cadastrar(novoUsuario);
+    }
+    
+    public List<Usuario> listaUsuarios() {
+        //List<SelectItem> listaSelectItems;
+        //SelectItem selItem = new SelectItem("value", "label");
+        UsuarioDao usuarioDao = new UsuarioDao();
+        return usuarioDao.listar();
     }
 
     public Usuario getNovoUsuario() {
