@@ -5,8 +5,10 @@
  */
 package beans;
 
+import dao.UsuarioDao;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import model.entities.Usuario;
 
 /**
  *
@@ -16,10 +18,24 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class UsuarioBean {
 
-    /**
-     * Creates a new instance of UsuarioBean
-     */
+    private Usuario novoUsuario;
+    
     public UsuarioBean() {
+        novoUsuario = new Usuario();
     }
+    
+    public void cadastrarUsuario() {
+        UsuarioDao usuarioDao = new UsuarioDao();
+        usuarioDao.cadastrar(novoUsuario);
+    }
+
+    public Usuario getNovoUsuario() {
+        return novoUsuario;
+    }
+
+    public void setNovoUsuario(Usuario novoUsuario) {
+        this.novoUsuario = novoUsuario;
+    }
+    
     
 }
