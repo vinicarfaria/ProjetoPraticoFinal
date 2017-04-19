@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.entities;
+package entities;
 
 import java.io.Serializable;
 import java.util.List;
@@ -31,6 +31,7 @@ import javax.persistence.Table;
     , @NamedQuery(name = "Usuario.findByNome", query = "SELECT u FROM Usuario u WHERE u.nome = :nome")
     , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
     , @NamedQuery(name = "Usuario.findByLogin", query = "SELECT u FROM Usuario u WHERE u.login = :login")
+    , @NamedQuery(name = "Usuario.findByLoginAndSenha", query = "SELECT u FROM Usuario u WHERE u.login = :login and u.senha = :senha")    
     , @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha")})
 public class Usuario implements Serializable {
 
@@ -140,7 +141,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "model.entities.Usuario[ usuarioID=" + usuarioID + " ]";
+        return "entities.Usuario[ usuarioID=" + usuarioID + " ]";
     }
     
 }

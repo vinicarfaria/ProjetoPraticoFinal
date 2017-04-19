@@ -46,5 +46,10 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/rpg?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">vini2</property>
     <property name="hibernate.connection.password">vini2</property>
+    <mapping class="entities.Classe" />
+    <mapping class="entities.Personagem" />
+    <mapping class="entities.Raca" />
+    <mapping class="entities.Usuario" />
+    <mapping class="entities.Usuariopersonagem" />
   </session-factory>
 </hibernate-configuration>

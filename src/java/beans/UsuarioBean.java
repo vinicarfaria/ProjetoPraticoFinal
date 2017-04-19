@@ -9,7 +9,9 @@ import dao.UsuarioDao;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import model.entities.Usuario;
+import entities.Usuario;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -19,15 +21,35 @@ import model.entities.Usuario;
 @SessionScoped
 public class UsuarioBean {
 
+    private Usuario usuario = new Usuario();
     private Usuario novoUsuario;
+    private Usuario usuarioLogado;
     
     public UsuarioBean() {
         novoUsuario = new Usuario();
+        usuarioLogado = new Usuario();
+        usuarioLogado = (Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+    }
+    
+    public String sair(){
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        usuarioLogado = null;
+        return "index";
     }
     
     public void cadastrarUsuario() {
-        UsuarioDao usuarioDao = new UsuarioDao();
-        usuarioDao.cadastrar(novoUsuario);
+            UsuarioDao usuarioDao = new UsuarioDao();
+            usuario = usuarioDao.getlogin(novoUsuario.getLogin());
+        if(usuario == null){
+            usuarioDao.cadastrar(novoUsuario);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Successo!",  "O usuário "+novoUsuario.getLogin()+" foi cadastrado. "
+                    + "Agora você pode voltar para tela de login ou cadastrar mais usuários.") );
+        } else {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Atenção!",  "O nome de usuário "+novoUsuario.getLogin()+" já foi usado! "
+                    + "Por favor, escolha outro nome de usuário!") );
+        }
     }
     
     public List<Usuario> listaUsuarios() {
@@ -44,6 +66,16 @@ public class UsuarioBean {
     public void setNovoUsuario(Usuario novoUsuario) {
         this.novoUsuario = novoUsuario;
     }
+
+    public Usuario getUsuarioLogado() {
+        return usuarioLogado;
+    }
+
+    public void setUsuarioLogado(Usuario usuarioLogado) {
+        this.usuarioLogado = usuarioLogado;
+    }
+    
+    
     
     
 }

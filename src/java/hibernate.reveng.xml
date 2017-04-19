@@ -41,15 +41,9 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="rpg"/>
-  <table-filter match-name="magiapersonagem"/>
-  <table-filter match-name="atributopersonagem"/>
-  <table-filter match-name="desvantagem"/>
-  <table-filter match-name="personagem"/>
-  <table-filter match-name="vantagem"/>
-  <table-filter match-name="magia"/>
-  <table-filter match-name="usuariopersonagem"/>
-  <table-filter match-name="atributo"/>
-  <table-filter match-name="desvantagempersonagem"/>
-  <table-filter match-name="vantagempersonagem"/>
   <table-filter match-name="usuario"/>
+  <table-filter match-name="usuariopersonagem"/>
+  <table-filter match-name="personagem"/>
+  <table-filter match-name="raca"/>
+  <table-filter match-name="classe"/>
 </hibernate-reverse-engineering>

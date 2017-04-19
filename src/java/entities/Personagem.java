@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.entities;
+package entities;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -30,11 +32,11 @@ import javax.persistence.Table;
     , @NamedQuery(name = "Personagem.findByPersonagemID", query = "SELECT p FROM Personagem p WHERE p.personagemID = :personagemID")
     , @NamedQuery(name = "Personagem.findByNome", query = "SELECT p FROM Personagem p WHERE p.nome = :nome")
     , @NamedQuery(name = "Personagem.findByNivel", query = "SELECT p FROM Personagem p WHERE p.nivel = :nivel")
-    , @NamedQuery(name = "Personagem.findByRaca", query = "SELECT p FROM Personagem p WHERE p.raca = :raca")
-    , @NamedQuery(name = "Personagem.findByIdade", query = "SELECT p FROM Personagem p WHERE p.idade = :idade")
-    , @NamedQuery(name = "Personagem.findByPeso", query = "SELECT p FROM Personagem p WHERE p.peso = :peso")
-    , @NamedQuery(name = "Personagem.findByAltura", query = "SELECT p FROM Personagem p WHERE p.altura = :altura")
-    , @NamedQuery(name = "Personagem.findBySexo", query = "SELECT p FROM Personagem p WHERE p.sexo = :sexo")})
+    , @NamedQuery(name = "Personagem.findByForca", query = "SELECT p FROM Personagem p WHERE p.forca = :forca")
+    , @NamedQuery(name = "Personagem.findByHabilidade", query = "SELECT p FROM Personagem p WHERE p.habilidade = :habilidade")
+    , @NamedQuery(name = "Personagem.findByResistencia", query = "SELECT p FROM Personagem p WHERE p.resistencia = :resistencia")
+    , @NamedQuery(name = "Personagem.findByArmadura", query = "SELECT p FROM Personagem p WHERE p.armadura = :armadura")
+    , @NamedQuery(name = "Personagem.findByVida", query = "SELECT p FROM Personagem p WHERE p.vida = :vida")})
 public class Personagem implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,30 +52,28 @@ public class Personagem implements Serializable {
     @Column(name = "nivel")
     private int nivel;
     @Basic(optional = false)
-    @Column(name = "raca")
-    private String raca;
+    @Column(name = "forca")
+    private int forca;
     @Basic(optional = false)
-    @Column(name = "idade")
-    private int idade;
+    @Column(name = "habilidade")
+    private int habilidade;
     @Basic(optional = false)
-    @Column(name = "peso")
-    private float peso;
+    @Column(name = "resistencia")
+    private int resistencia;
     @Basic(optional = false)
-    @Column(name = "altura")
-    private float altura;
+    @Column(name = "armadura")
+    private int armadura;
     @Basic(optional = false)
-    @Column(name = "sexo")
-    private String sexo;
+    @Column(name = "vida")
+    private int vida;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personagem")
     private List<Usuariopersonagem> usuariopersonagemList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personagem")
-    private List<Magiapersonagem> magiapersonagemList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personagem")
-    private List<Atributopersonagem> atributopersonagemList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personagem")
-    private List<Vantagempersonagem> vantagempersonagemList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personagem")
-    private List<Desvantagempersonagem> desvantagempersonagemList;
+    @JoinColumn(name = "racaID", referencedColumnName = "racaID")
+    @ManyToOne(optional = false)
+    private Raca raca;
+    @JoinColumn(name = "classeID", referencedColumnName = "classeID")
+    @ManyToOne(optional = false)
+    private Classe classe;
 
     public Personagem() {
     }
@@ -82,15 +82,15 @@ public class Personagem implements Serializable {
         this.personagemID = personagemID;
     }
 
-    public Personagem(Integer personagemID, String nome, int nivel, String raca, int idade, float peso, float altura, String sexo) {
+    public Personagem(Integer personagemID, String nome, int nivel, int forca, int habilidade, int resistencia, int armadura, int vida) {
         this.personagemID = personagemID;
         this.nome = nome;
         this.nivel = nivel;
-        this.raca = raca;
-        this.idade = idade;
-        this.peso = peso;
-        this.altura = altura;
-        this.sexo = sexo;
+        this.forca = forca;
+        this.habilidade = habilidade;
+        this.resistencia = resistencia;
+        this.armadura = armadura;
+        this.vida = vida;
     }
 
     public Integer getPersonagemID() {
@@ -117,44 +117,44 @@ public class Personagem implements Serializable {
         this.nivel = nivel;
     }
 
-    public String getRaca() {
-        return raca;
+    public int getForca() {
+        return forca;
     }
 
-    public void setRaca(String raca) {
-        this.raca = raca;
+    public void setForca(int forca) {
+        this.forca = forca;
     }
 
-    public int getIdade() {
-        return idade;
+    public int getHabilidade() {
+        return habilidade;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setHabilidade(int habilidade) {
+        this.habilidade = habilidade;
     }
 
-    public float getPeso() {
-        return peso;
+    public int getResistencia() {
+        return resistencia;
     }
 
-    public void setPeso(float peso) {
-        this.peso = peso;
+    public void setResistencia(int resistencia) {
+        this.resistencia = resistencia;
     }
 
-    public float getAltura() {
-        return altura;
+    public int getArmadura() {
+        return armadura;
     }
 
-    public void setAltura(float altura) {
-        this.altura = altura;
+    public void setArmadura(int armadura) {
+        this.armadura = armadura;
     }
 
-    public String getSexo() {
-        return sexo;
+    public int getVida() {
+        return vida;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
+    public void setVida(int vida) {
+        this.vida = vida;
     }
 
     public List<Usuariopersonagem> getUsuariopersonagemList() {
@@ -165,36 +165,20 @@ public class Personagem implements Serializable {
         this.usuariopersonagemList = usuariopersonagemList;
     }
 
-    public List<Magiapersonagem> getMagiapersonagemList() {
-        return magiapersonagemList;
+    public Raca getRaca() {
+        return raca;
     }
 
-    public void setMagiapersonagemList(List<Magiapersonagem> magiapersonagemList) {
-        this.magiapersonagemList = magiapersonagemList;
+    public void setRaca(Raca raca) {
+        this.raca = raca;
     }
 
-    public List<Atributopersonagem> getAtributopersonagemList() {
-        return atributopersonagemList;
+    public Classe getClasse() {
+        return classe;
     }
 
-    public void setAtributopersonagemList(List<Atributopersonagem> atributopersonagemList) {
-        this.atributopersonagemList = atributopersonagemList;
-    }
-
-    public List<Vantagempersonagem> getVantagempersonagemList() {
-        return vantagempersonagemList;
-    }
-
-    public void setVantagempersonagemList(List<Vantagempersonagem> vantagempersonagemList) {
-        this.vantagempersonagemList = vantagempersonagemList;
-    }
-
-    public List<Desvantagempersonagem> getDesvantagempersonagemList() {
-        return desvantagempersonagemList;
-    }
-
-    public void setDesvantagempersonagemList(List<Desvantagempersonagem> desvantagempersonagemList) {
-        this.desvantagempersonagemList = desvantagempersonagemList;
+    public void setClasse(Classe classe) {
+        this.classe = classe;
     }
 
     @Override
@@ -219,7 +203,7 @@ public class Personagem implements Serializable {
 
     @Override
     public String toString() {
-        return "model.entities.Personagem[ personagemID=" + personagemID + " ]";
+        return "entities.Personagem[ personagemID=" + personagemID + " ]";
     }
     
 }

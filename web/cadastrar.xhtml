@@ -11,21 +11,22 @@
             <p:spacer class="ui-g-2"></p:spacer>
             <p:panel id="cadastrarPanel" header="Cadastre-se" class="ui-g-8 ui-g-nopad" style="text-align: center">
                 <h:form id="cadastrarForm" >
+                    <p:growl id="growl" showDetail="true" sticky="true" />
                     <p:inputText id="nome" value="#{usuarioBean.novoUsuario.nome}" class="ui-g-12" placeholder="Nome completo" required="true" ></p:inputText>
                     <p:message for="nome" ></p:message>
                     <p:spacer height="10px" width="100%"/>
                     <p:inputText id="email" value="#{usuarioBean.novoUsuario.email}" class="ui-g-12" placeholder="E-mail" required="true" ></p:inputText>
                     <p:message for="email" ></p:message>
                     <p:spacer height="10px" width="100%"/>
-                    <p:inputText id="username" value="#{usuarioBean.novoUsuario.login}" class="ui-g-12" placeholder="Nome do usuário" required="true" />
+                    <p:inputText id="username" value="#{usuarioBean.novoUsuario.login}" class="ui-g-12" placeholder="Nome de usuário" required="true" />
                     <p:spacer height="10px" width="100%"/>
                     <p:password id="senha" value="#{usuarioBean.novoUsuario.senha}" placeholder="Senha"  class="ui-g-12" feedback="true" promptLabel="Digite a senha" weakLabel="Fraca"
                     goodLabel="Boa" strongLabel="Forte" />
                     <p:spacer height="10px" width="100%"/>
-                    <p:commandButton style="width: 100%" action="#{usuarioBean.cadastrarUsuario()}" update="cadastrarPanel" value="Salvar cadastro" styleClass="ui-priority-primary"/>
+                    <p:commandButton style="width: 100%" action="#{usuarioBean.cadastrarUsuario()}" update="cadastrarForm" ajax="true" value="Salvar cadastro" styleClass="ui-priority-primary"/>
                     <p:spacer height="10px" width="100%"/>
                     <div class="ui-g-4" />
-                    <p:button class="ui-g-4 ui-g-nopad" value="Cancelar" outcome="index"  />
+                    <p:button class="ui-g-4 ui-g-nopad" value="Voltar" outcome="index"  />
                     <div class="ui-g-4" />
                 </h:form>
             </p:panel>

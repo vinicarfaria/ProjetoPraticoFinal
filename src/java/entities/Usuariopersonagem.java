@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.entities;
+package entities;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -95,7 +95,7 @@ public class Usuariopersonagem implements Serializable {
 
     @Override
     public String toString() {
-        return "model.entities.Usuariopersonagem[ usuarioPersonagemID=" + usuarioPersonagemID + " ]";
+        return "entities.Usuariopersonagem[ usuarioPersonagemID=" + usuarioPersonagemID + " ]";
     }
     
 }

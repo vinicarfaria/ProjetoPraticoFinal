@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Conta</title>
+        <style>
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                top: 0;
+                overflow: hidden;
+                background-color: #333;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            li a:hover:not(.active) {
+                background-color: #111;
+            }
+
+            .active {
+                background-color: #4CAF50;
+            }
+            body {
+                margin: 0;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <ul>
+            <li style="width: 10%" />
+            <li><p:link outcome="home" value="Meus personagens" /></li>
+            <li><p:link outcome="conta" value="Minha conta"></p:link></li>
+            <li style="float:right"><p:commandLink value="Sair"  class="active" action="#{usuarioBean.sair()}"></p:commandLink></li>
+            <li style="float:right"><p:link value="#{usuarioBean.usuarioLogado.nome}" ></p:link></li>
+        </ul>
+        
+        <h:form>
+            <p:panel id="panel" header="Dados da conta" style="margin-top:10px;margin-left:25%;width: 50%">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel value="Nome: "></p:outputLabel>
+                    <p:outputLabel value="#{usuarioBean.usuarioLogado.nome}"></p:outputLabel>
+
+                    <p:outputLabel value="E-mail: "></p:outputLabel>
+                    <p:outputLabel value="#{usuarioBean.usuarioLogado.email}"></p:outputLabel>
+
+                    <p:outputLabel value="Usuário: "></p:outputLabel>
+                    <p:outputLabel value="#{usuarioBean.usuarioLogado.login}"></p:outputLabel>
+                </h:panelGrid>
+            
+                <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
+                    <p:commandButton value="Alterar meus dados" />
+                </h:outputLink>
+    <!--            https://www.primefaces.org/showcase/ui/overlay/dialog/loginDemo.xhtml-->
+                <p:growl id="growl" sticky="true" showDetail="true" life="5" />
+
+                <p:dialog header="Editar minha conta" widgetVar="dlg" resizable="false">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="nome" value="Novo nome:" />
+                        <p:inputText id="nome" value="#{userLoginView.username}" required="true" label="nome" />
+
+                        <h:outputLabel for="email" value="Novo E-mail:" />
+                        <p:inputText id="email" value="#{userLoginView.username}" required="true" label="email" />
+
+                        <h:outputLabel for="login" value="Novo Usuário:" />
+                        <p:inputText id="login" value="#{userLoginView.username}" required="true" label="login" />
+
+                        <h:outputLabel for="senha" value="Nova senha:" />
+                        <p:password id="senha" value="#{userLoginView.password}" required="true" label="senha" />
+
+                        <f:facet name="footer">
+                            <p:commandButton value="Salvar alterações" update="growl" actionListener="#{userLoginView.login}"
+                                             oncomplete="handleLoginRequest(xhr, status, args)" />
+                        </f:facet>  
+                    </h:panelGrid>
+                </p:dialog>
+            </p:panel>
+        </h:form>
+        
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if(args.validationFailed || !args.loggedIn) {
+                    PF('dlg').jq.effect("shake", {times:5}, 100);
+                }
+                else {
+                    PF('dlg').hide();
+                    $('#loginLink').fadeOut();
+                }
+            }
+        </script>
+    </h:body>
+</html>
+

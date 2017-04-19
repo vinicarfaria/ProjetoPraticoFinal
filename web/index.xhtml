@@ -23,13 +23,14 @@
             <div class="ui-g-4"></div>
             <h:form id="loginForm" class="ui-g-4 ui-g-nopad" style="margin-top: 10%">
                 <p:panel header="Login" style="text-align: center;">
-                    <p:inputText id="username" value="#{loginBean.usuario}" class="ui-g-12" placeholder="Usuário" required="true" ></p:inputText>
+                    <p:messages id="messages" />
+                    <p:inputText id="username" value="#{loginBean.usuario.login}" class="ui-g-12" placeholder="Usuário" required="true" ></p:inputText>
                     <p:spacer></p:spacer>
                     <p:message for="username" ></p:message>
-                    <p:password id="password" value="#{loginBean.senha}" placeholder="Senha" class="ui-g-12" required="true" feedback="false" ></p:password>
+                    <p:password id="password" value="#{loginBean.usuario.senha}" placeholder="Senha" class="ui-g-12" required="true" feedback="false" ></p:password>
                     <p:spacer></p:spacer>
                     <p:message for="password"></p:message>
-                    <p:commandButton style="width: 100%"  value="Entrar" styleClass="ui-priority-primary" update="loginForm" ajax="true" ></p:commandButton>
+                    <p:commandButton style="width: 100%"  value="Entrar" action="#{loginBean.envia()}" styleClass="ui-priority-primary"  ajax="false" ></p:commandButton>
                     <p:spacer></p:spacer>
                     <div class="linha">
                         <span>
