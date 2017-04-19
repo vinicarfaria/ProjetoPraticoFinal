@@ -54,7 +54,7 @@ public class Usuario implements Serializable {
     @Column(name = "senha")
     private String senha;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private List<Usuariopersonagem> usuariopersonagemList;
+    private List<Personagem> personagemList;
 
     public Usuario() {
     }
@@ -111,12 +111,12 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    public List<Usuariopersonagem> getUsuariopersonagemList() {
-        return usuariopersonagemList;
+    public List<Personagem> getPersonagemList() {
+        return personagemList;
     }
 
-    public void setUsuariopersonagemList(List<Usuariopersonagem> usuariopersonagemList) {
-        this.usuariopersonagemList = usuariopersonagemList;
+    public void setPersonagemList(List<Personagem> personagemList) {
+        this.personagemList = personagemList;
     }
 
     @Override

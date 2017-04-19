@@ -37,6 +37,14 @@ public class UsuarioBean {
         return "index";
     }
     
+    public void editarUsuario() {
+        UsuarioDao alunoDao = new UsuarioDao();
+        alunoDao.editar(usuarioLogado);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().replace("usuario", this.usuarioLogado);//put("usuario", this.usuario);
+        FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Successo!",  "Alterações salvas.") );
+    }
+    
     public void cadastrarUsuario() {
             UsuarioDao usuarioDao = new UsuarioDao();
             usuario = usuarioDao.getlogin(novoUsuario.getLogin());

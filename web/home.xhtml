@@ -41,16 +41,83 @@
         </style>
     </h:head>
     <h:body>
-        <ul>
-            <li style="width: 10%" />
-            <li><p:link outcome="home" value="Meus personagens" /></li>
-            <li><p:link outcome="conta" value="Minha conta"></p:link></li>
-            <li style="float:right"><p:commandLink value="Sair"  class="active" action="#{usuarioBean.sair()}"></p:commandLink></li>
-            <li style="float:right"><p:link value="#{usuarioBean.usuarioLogado.nome}" ></p:link></li>
-        </ul>
+        <h:form>
+            <ul>
+                <li style="width: 10%" />
+                <li><p:link outcome="home" value="Meus personagens" /></li>
+                <li><p:link outcome="conta" value="Minha conta"></p:link></li>
+                <li style="float:right"><p:commandLink value="Sair"  class="active" action="#{usuarioBean.sair()}"></p:commandLink></li>
+                <li style="float:right"><p:link value="#{usuarioBean.usuarioLogado.nome}" ></p:link></li>
+            </ul>
+        </h:form>
         
-        <h:form >
-            <p:panel id="panel" header="Dados da conta" style="margin-top:10px;margin-left:25%;width: 50%">
+        <p:panel id="panel" header="Personagens" style="margin-top:10px;width: 100%">
+            <h:form >
+                <f:view>
+                    <p:dataTable value="#{personagensBean.listaPersonagens()}" var="item">
+                        <p:column width="20%" style="text-align: center" >
+                            <f:facet name="header">
+                                <h:outputText value="Nome"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nome}"/>
+                        </p:column>
+                        <p:column width="5%" style="text-align: center" >
+                            <f:facet name="header">
+                                <h:outputText value="Nível"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nivel}"/>
+                        </p:column>
+                        <p:column width="10%" style="text-align: center" >
+                            <f:facet name="header">
+                                <h:outputText value="Raça"/>
+                            </f:facet>
+                            <h:outputText value="#{item.raca.nome}"/>
+                        </p:column>
+                        <p:column width="10%" style="text-align: center" >
+                            <f:facet name="header">
+                                <h:outputText value="Classe"/>
+                            </f:facet>
+                            <h:outputText value="#{item.classe.nome}"/>
+                        </p:column>
+                        <p:column width="10%" style="text-align: center" >
+                            <f:facet name="header">
+                                <h:outputText value="Força"/>
+                            </f:facet>
+                            <h:outputText value="#{item.forca}"/>
+                        </p:column>
+                        <p:column width="10%" style="text-align: center" >
+                            <f:facet name="header">
+                                <h:outputText value="Habilidade"/>
+                            </f:facet>
+                            <h:outputText value="#{item.habilidade}"/>
+                        </p:column>
+                        <p:column width="10%" style="text-align: center" >
+                            <f:facet name="header">
+                                <h:outputText value="Resistência"/>
+                            </f:facet>
+                            <h:outputText value="#{item.resistencia}"/>
+                        </p:column>
+                        <p:column width="10%" style="text-align: center" >
+                            <f:facet name="header">
+                                <h:outputText value="Armadura"/>
+                            </f:facet>
+                            <h:outputText value="#{item.armadura}"/>
+                        </p:column>
+                        <p:column width="10%" style="text-align: center" >
+                            <f:facet name="header">
+                                <h:outputText value="Vida"/>
+                            </f:facet>
+                            <h:outputText value="#{item.vida}"/>
+                        </p:column>
+                        <p:column width="5%" style="text-align: center" >
+                            <f:facet name="header">
+                            </f:facet>
+                            <p:commandButton  icon="ui-icon-trash" type="button" action="#{personagensBean.excluirPersonagem(item)}"/>
+                        </p:column>
+                    </p:dataTable>
+                </f:view><br/>
+            </h:form>
+            <h:form>
                 <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();">
                     <p:commandButton value="Cadastrar novo personagem" />
                 </h:outputLink>
@@ -60,51 +127,50 @@
                 <p:dialog header="Cadastrar novo personagem" widgetVar="dlg" resizable="false" width="50%">
                     <h:panelGrid columns="4" cellpadding="5">
                         <h:outputLabel for="nome" value="Nome do personagem:" />
-                        <p:inputText id="nome" value="#{userLoginView.username}" required="true" label="nome" />
+                        <p:inputText id="nome" value="#{personagensBean.novoPersonagem.nome}" required="true" label="nome" />
                         <h:outputLabel for="nivel" value="Nível:" />
-                        <p:inputText id="nivel" value="#{userLoginView.username}" required="true" label="nivel" />
+                        <p:inputText id="nivel" value="#{personagensBean.novoPersonagem.nivel}" required="true" label="nivel" type="number" />
 
                         <h:outputLabel for="forca" value="Força:" />
-                        <p:inputText id="forca" value="#{userLoginView.username}" required="true" label="forca" type="number" />
+                        <p:inputText id="forca" value="#{personagensBean.novoPersonagem.forca}" required="true" label="forca" type="number" />
                         <h:outputLabel for="hab" value="Habilidade:" />
-                        <p:inputText id="hab" value="#{userLoginView.username}" required="true" label="hab" type="number" />
+                        <p:inputText id="hab" value="#{personagensBean.novoPersonagem.habilidade}" required="true" label="hab" type="number" />
                         
                         <h:outputLabel for="res" value="Resistência:" />
-                        <p:inputText id="res" value="#{userLoginView.username}" required="true" label="res" type="number" />
+                        <p:inputText id="res" value="#{personagensBean.novoPersonagem.resistencia}" required="true" label="res" type="number" />
                         <h:outputLabel for="arm" value="Armadura:" />
-                        <p:inputText id="arm" value="#{userLoginView.username}" required="true" label="arm" type="number" />
+                        <p:inputText id="arm" value="#{personagensBean.novoPersonagem.armadura}" required="true" label="arm" type="number" />
                         
                         <h:outputLabel for="vida" value="Vida:" />
-                        <p:inputText id="vida" value="#{userLoginView.username}" required="true" label="vida" type="number" />
+                        <p:inputText id="vida" value="#{personagensBean.novoPersonagem.vida}" required="true" label="vida" type="number" />
                         
-<!--                        <h:outputLabel value="Raça:" />
-                        <h:selectOneMenu value="">
+                        <h:outputLabel value="Raça:" />
+                        <h:selectOneMenu value="#{personagensBean.novoPersonagem.raca.racaID}">
                             <f:selectItem itemValue="0" itemLabel="Selecione a raça" />
-                            <f:selectItems value="" var="raca" itemValue="" 
-                                           itemLabel="" /> 
+                            <f:selectItems value="#{racaBean.listaRacas()}" var="raca" itemValue="#{raca.racaID}" itemLabel="#{raca.nome}" /> 
                         </h:selectOneMenu>
                         <h:outputLabel value="Classe:" />
-                        <h:selectOneMenu value="">
+                        <h:selectOneMenu value="#{personagensBean.novoPersonagem.classe.classeID}">
                             <f:selectItem itemValue="0" itemLabel="Selecione a classe" />
-                            <f:selectItems value="" var="raca" itemValue="" 
-                                           itemLabel="" /> 
-                        </h:selectOneMenu>-->
+                            <f:selectItems value="#{classeBean.listaClasses()}" var="classe" itemValue="#{classe.classeID}" itemLabel="#{classe.nome}" /> 
+                        </h:selectOneMenu>
 
                         
                         
                         <f:facet name="footer">
-                            <p:commandButton value="Salvar alterações" update="growl" actionListener="#{userLoginView.login}"
-                                             oncomplete="handleLoginRequest(xhr, status, args)" />
+                            <p:commandButton value="Salvar alterações" update="growl" action="#{personagensBean.cadastrarPersonagem()}"
+                                             oncomplete="handleLoginRequest(xhr, status, args)"/>
                         </f:facet>  
                     </h:panelGrid>
                 </p:dialog>
-            </p:panel>
-        </h:form>
+            </h:form>
+        </p:panel>
         
         <script type="text/javascript">
             function handleLoginRequest(xhr, status, args) {
                 if(args.validationFailed || !args.loggedIn) {
-                    PF('dlg').jq.effect("shake", {times:5}, 100);
+                    PF('dlg').hide();
+                    $('#loginLink').fadeOut();
                 }
                 else {
                     PF('dlg').hide();

@@ -6,9 +6,7 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +16,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -66,16 +63,20 @@ public class Personagem implements Serializable {
     @Basic(optional = false)
     @Column(name = "vida")
     private int vida;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personagem")
-    private List<Usuariopersonagem> usuariopersonagemList;
     @JoinColumn(name = "racaID", referencedColumnName = "racaID")
     @ManyToOne(optional = false)
     private Raca raca;
     @JoinColumn(name = "classeID", referencedColumnName = "classeID")
     @ManyToOne(optional = false)
     private Classe classe;
+    @JoinColumn(name = "usuarioID", referencedColumnName = "usuarioID")
+    @ManyToOne(optional = false)
+    private Usuario usuario;
 
     public Personagem() {
+        raca = new Raca();
+        classe = new Classe();
+        usuario = new Usuario();
     }
 
     public Personagem(Integer personagemID) {
@@ -157,14 +158,6 @@ public class Personagem implements Serializable {
         this.vida = vida;
     }
 
-    public List<Usuariopersonagem> getUsuariopersonagemList() {
-        return usuariopersonagemList;
-    }
-
-    public void setUsuariopersonagemList(List<Usuariopersonagem> usuariopersonagemList) {
-        this.usuariopersonagemList = usuariopersonagemList;
-    }
-
     public Raca getRaca() {
         return raca;
     }
@@ -179,6 +172,14 @@ public class Personagem implements Serializable {
 
     public void setClasse(Classe classe) {
         this.classe = classe;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

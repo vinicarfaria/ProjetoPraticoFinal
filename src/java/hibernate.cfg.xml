@@ -50,6 +50,5 @@ Contributor(s):
     <mapping class="entities.Personagem" />
     <mapping class="entities.Raca" />
     <mapping class="entities.Usuario" />
-    <mapping class="entities.Usuariopersonagem" />
   </session-factory>
 </hibernate-configuration>

@@ -61,7 +61,15 @@ public class UsuarioDao {
     public void editar(Usuario usuario) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        Query query = session.createQuery("from Usuario u ORDER BY u.nome ASC");
+        session.update(usuario);
+        t.commit();
+    }
+    
+    public void excluir(Usuario usuario) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        session.delete(usuario);
+        t.commit();
     }
     
     public List<Usuario> listar() {
