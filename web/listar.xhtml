@@ -8,10 +8,10 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <f:view>
+<!--        <f:view>-->
 
 
-            <h:form>
+<!--            <h:form>
                 <h1><h:outputText value="List"/></h1>
                 <p:dataTable value="#{usuarioBean.listaUsuarios()}" var="item">
                     <p:column>
@@ -46,7 +46,44 @@
                     </p:column>
                 </p:dataTable>
             </h:form>
-        </f:view>
+        </f:view>-->
+
+        <p:panel id="panel" header="Personagens" style="margin-top:10px;width: 100%">
+            <h:form >
+                    <p:dataTable value="#{personagensBean.listaPersonagens()}" var="item">
+                        <p:column width="20%" style="text-align: center" headerText="Nome">
+                            <h:outputText value="#{item.nome}"/>
+                        </p:column>
+                        <p:column width="5%" style="text-align: center" headerText="Nível">
+                            <h:outputText value="#{item.nivel}"/>
+                        </p:column>
+                        <p:column width="10%" style="text-align: center" headerText="Raça">
+                            <h:outputText value="#{item.raca.nome}"/>
+                        </p:column>
+                        <p:column width="10%" style="text-align: center" headerText="Classe">
+                            <h:outputText value="#{item.classe.nome}"/>
+                        </p:column>
+                        <p:column width="10%" style="text-align: center" headerText="Força">
+                            <h:outputText value="#{item.forca}"/>
+                        </p:column>
+                        <p:column width="10%" style="text-align: center" headerText="Habilidade">
+                            <h:outputText value="#{item.habilidade}"/>
+                        </p:column>
+                        <p:column width="10%" style="text-align: center"  headerText="Resistência">
+                            <h:outputText value="#{item.resistencia}"/>
+                        </p:column>
+                        <p:column width="10%" style="text-align: center" headerText="Armadura">
+                            <h:outputText value="#{item.armadura}"/>
+                        </p:column>
+                        <p:column width="10%" style="text-align: center" headerText="Vida">
+                            <h:outputText value="#{item.vida}"/>
+                        </p:column>
+                        <p:column width="5%" style="text-align: center" >
+                            <p:commandButton  icon="ui-icon-trash" type="submit" action="#{personagensBean.excluirPersonagem(item)}"/>
+                        </p:column>
+                    </p:dataTable>
+            </h:form>
+        </p:panel>
 
     </h:body>
 </html>

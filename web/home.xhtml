@@ -51,7 +51,7 @@
             </ul>
         </h:form>
         
-        <p:panel id="panel" header="Personagens" style="margin-top:10px;width: 100%">
+        <p:panel id="panelPersonagens" header="Personagens" style="margin-top:10px;width: 100%">
             <h:form >
                 <f:view>
                     <p:dataTable value="#{personagensBean.listaPersonagens()}" var="item">
@@ -112,7 +112,7 @@
                         <p:column width="5%" style="text-align: center" >
                             <f:facet name="header">
                             </f:facet>
-                            <p:commandButton  icon="ui-icon-trash" type="button" action="#{personagensBean.excluirPersonagem(item)}"/>
+                            <p:commandButton  icon="ui-icon-trash" action="#{personagensBean.excluirPersonagem(item)}" update="panelPersonagens"/>
                         </p:column>
                     </p:dataTable>
                 </f:view><br/>
@@ -124,7 +124,7 @@
     <!--            https://www.primefaces.org/showcase/ui/overlay/dialog/loginDemo.xhtml-->
                 <p:growl id="growl" sticky="true" showDetail="true" life="5" />
 
-                <p:dialog header="Cadastrar novo personagem" widgetVar="dlg" resizable="false" width="50%">
+                <p:dialog id="dialogCadastro" header="Cadastrar novo personagem" widgetVar="dlg" resizable="false" width="50%">
                     <h:panelGrid columns="4" cellpadding="5">
                         <h:outputLabel for="nome" value="Nome do personagem:" />
                         <p:inputText id="nome" value="#{personagensBean.novoPersonagem.nome}" required="true" label="nome" />
@@ -158,7 +158,7 @@
                         
                         
                         <f:facet name="footer">
-                            <p:commandButton value="Salvar alterações" update="growl" action="#{personagensBean.cadastrarPersonagem()}"
+                            <p:commandButton value="Salvar alterações" update="panelPersonagens" action="#{personagensBean.cadastrarPersonagem()}"
                                              oncomplete="handleLoginRequest(xhr, status, args)"/>
                         </f:facet>  
                     </h:panelGrid>
